@@ -11,7 +11,7 @@ class ProductListCreate(generics.ListCreateAPIView):
 	permission_classes = [IsAuthenticated]
 
 	def get_queryset(self):
-		return Product.objects.All
+		return Product.objects.all()
 	
 class OrderListCreate(generics.ListCreateAPIView):
 	serializer_class = OrderSerializer

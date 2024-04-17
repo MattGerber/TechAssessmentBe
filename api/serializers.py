@@ -3,9 +3,10 @@ from rest_framework import serializers
 from .models import Product, Order
 
 class UserSerializer(serializers.ModelSerializer):
+	name = serializers.CharField(source='username')
 	class Meta:
 		model = User
-		fields = ["id", "username", "password"]
+		fields = ["id", "name", "password", "email"]
 		extra_kwargs = {"password": {"write_only": True}}
 
 	def create(self, validated_data):

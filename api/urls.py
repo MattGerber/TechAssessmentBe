@@ -1,7 +1,15 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework.routers import SimpleRouter
+from .views import CustomerViewSet, ProductDeleteViewSet, ProductListCreate, OrderListCreate
+
+router = SimpleRouter()
+router.register(r"remove-products", ProductDeleteViewSet, "api")
+router.register(r"product", ProductListCreate, "product")
+router.register(r"customer", CustomerViewSet, "customer")
 
 urlpatterns = [
-	path("product/", views.ProductListCreate.as_view(), name="product"),
-	path("remove-products/", views.ProductDelete.as_view(), name="delete-product"),
+	# path("product/", ProductListCreate.as_view(), name="product"),
+	path("order/", OrderListCreate.as_view(), name="orders"),
+	# path("remove-products/", views.ProductDelete.as_view(), name="delete-product"),
+	path("", include(router.urls))
 ]

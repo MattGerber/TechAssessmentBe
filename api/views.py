@@ -14,6 +14,26 @@ class ProductListCreate(viewsets.ModelViewSet):
 
 	def get_queryset(self):
 		return Product.objects.all()
+	
+	def retrieve(self, request, *args, **kwargs):
+        # do your customization here
+		instance = self.get_object()
+		serializer = self.get_serializer(instance)
+		return Response({"product": serializer.data})
+	
+class ProductsListCreate(viewsets.ModelViewSet):
+	queryset = Product.objects.all()
+	serializer_class = ProductSerializer
+	permission_classes = [IsAuthenticated]
+
+	def get_queryset(self):
+		return Product.objects.all()
+	
+	def retrieve(self, request, *args, **kwargs):
+        # do your customization here
+		instance = self.get_object()
+		serializer = self.get_serializer(instance)
+		return Response({"products": serializer.data})
 
 class CustomerViewSet(viewsets.ModelViewSet):
 	serializer_class = UserSerializer
